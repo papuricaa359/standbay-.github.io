@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トイストーリーマニア待ち時間</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background-color: #faeec1;
+      width: 90vw;
+      height: 90vh;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 70px;
+      margin-bottom: 10px;
+      color: #173381;
+    }
+    #eng {
+      font-size: 8vw;
+      margin-bottom: 0;
+    }
+    #wait {
+      font-size: 5vw;
+    }
+    #remainingTime {
+      font-size:20vw; 
+      width: 35vw;
+      text-align: right;
+      color: #faeec1;
+      background-color: #51a5bf;
+      border-radius: 20px;
+    }
+    .flex {
+      display: flex;
+      margin-top: 30px;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px; 
+    }
+    #time {
+      font-size: 5vw;
+    }
+  </style>
+</head>
+<body onload="updateRemainingTime()">
+  <div class="card">
+    <h1 id="eng">STANDBY ENTRANCE</h1>
+    <h1>スタンバイ・エントランス</h1>
+    <h1 id="eng">=====WAIT TIME=====</h1>
+    <h1 id="wait">ここからの待ち時間</h1>
+    <div class="flex">
+      <h1 id="time">MIN</h1>
+      <div class="wait-time" id="remainingTime">Loading...</div>
+      <h1 id="time">分</h1>
+    </div>
+  </div>
+  
+  <script>
+    function updateRemainingTime() {
+      fetch('https://script.google.com/macros/s/AKfycbx6fV6m2DavFK46mwVOa6Wm5uDDjD9ViNx7E6q9bS38mgEK7WmgkB52bYetJ0xIwZ7_/exec?service=latestTime')
+        .then(response => response.text())
+        .then(time => {
+          document.getElementById('remainingTime').innerText = time;
+        });
+    }
+
+    setInterval(updateRemainingTime, 1000); 
+  </script>
+</body>
+</html>
